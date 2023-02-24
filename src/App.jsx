@@ -6,6 +6,7 @@ import NuevoPresupuesto from './component/NuevoPresupuesto'
 function App() {
 
   const [presupuesto, setPresupuesto]= useState(0);
+  const [isValid, setIsValid]=useState(false)
 
   return (
     <div>
@@ -13,6 +14,8 @@ function App() {
       <Header
       presupuesto={presupuesto}
       setPresupuesto={setPresupuesto}
+      isValid={isValid}
+      setIsValid={setIsValid}
       
       />
  

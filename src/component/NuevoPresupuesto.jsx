@@ -10,13 +10,15 @@ const [mensaje, setMensaje]= useState("")
 const handlePresupuesto = (e) => {
     e.preventDefault()
 
-    if(!(Number(presupuesto) || Number(presupuesto) < 0 )){
+    if(!Number(presupuesto) || Number(presupuesto) < 0 ){
         setMensaje("No es un presupuesto valido ")
-    } else{
-        console.log("si es un numero")
-    }
 
+    return
+    } setMensaje("")
+
+    console.log(presupuesto)
 }
+
 
 
     return ( 
@@ -27,18 +29,18 @@ const handlePresupuesto = (e) => {
                    
                     <input
                         className="nuevo-presupuesto"
-                        type="text"
+                        type="Number"
                         placeholder="Añade tu presupuesto"
                         value={presupuesto}
-                        onChange={e => setPresupuesto(e.target.value)}
+                        onChange={e => setPresupuesto(Number(e.target.value))}
                         
                     />
                 </div>
                     <input type="submit" value="añadir"/>
-                    {mensaje && <mensaje tipo="error" >{mensaje}</mensaje>}
+                    {mensaje && <Mensaje tipo="error" >{mensaje}</Mensaje>}
             </form>
         </div>
      );
 }
 
- 
+ export default NuevoPresupuesto ;
