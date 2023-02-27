@@ -3,7 +3,7 @@ import { useState } from "react";
 import Mensaje from "./Mensaje";
 
 
-function NuevoPresupuesto ({presupuesto,setPresupuesto}) {
+function NuevoPresupuesto ({presupuesto,setPresupuesto,setIsValid}) {
 
 const [mensaje, setMensaje]= useState("")
 
@@ -14,9 +14,11 @@ const handlePresupuesto = (e) => {
         setMensaje("No es un presupuesto valido ")
 
     return
-    } setMensaje("")
-
-    console.log(presupuesto)
+    } else{
+        setMensaje("")
+    setIsValid(true)
+    }
+    
 }
 
 

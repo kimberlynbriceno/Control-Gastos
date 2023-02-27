@@ -362,6 +362,7 @@ main {
 }
 .modal label {
     color: var(--blanco);
+    margin: 5px;
 }
 body .modal {
     overflow: hidden;
