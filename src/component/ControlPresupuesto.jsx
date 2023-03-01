@@ -3,7 +3,7 @@
 
 function ControlPresupuesto({presupuesto}) {
 
-    const formatearCantidad = (cantidad) => {
+     const formatearCantidad = (cantidad) => {
         return cantidad.toLocaleString("en-US", {style:"currency", currency:"USD"});
     }
 
@@ -31,3 +31,6 @@ function ControlPresupuesto({presupuesto}) {
 }
 
 export default ControlPresupuesto ;
+export const formatearCantidad = (cantidad) => {
+    return cantidad.toLocaleString("en-US", {style:"currency", currency:"USD"});
+}

@@ -4,7 +4,7 @@ import {generarId} from "./Helpers/"
 import IconoGastoNuevo from './img/nuevos-gasto.svg'
 import VentanaModal from './component/VentanaModal'
 import NuevoPresupuesto from './component/NuevoPresupuesto'
-
+import ListadoGastos from './component/ListadoGastos'
 
 function App() {
 
@@ -26,6 +26,8 @@ function App() {
 
     const guardarGasto  = gasto => {
       gasto.id = generarId()
+      gasto.fecha = Date.now();
+
       setGastos([...gastos, gasto])
       console.log(gasto)
 
@@ -37,7 +39,7 @@ function App() {
 
 
   return (
-    <div>
+    <div className={modal ? "fijar" : ""}>
       
       <Header
       presupuesto={presupuesto}
@@ -47,12 +49,19 @@ function App() {
       />
       
       {isValid ? (
-        <div className='nuevo-gasto'>
-        <img 
-        src={IconoGastoNuevo} 
-        alt="icono nuevo gasto"
-        onClick={handleNuevoGasto}/>
-        </div>) : null
+        
+       <> 
+       <main>
+          <ListadoGastos
+          gastos={gastos}
+          />
+       </main>
+       <div className='nuevo-gasto'>
+       <img 
+       src={IconoGastoNuevo} 
+       alt="icono nuevo gasto"
+       onClick={handleNuevoGasto}/>
+       </div> </> ) : null
       }
 
       {modal && 
