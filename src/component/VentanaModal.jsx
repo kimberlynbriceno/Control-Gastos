@@ -12,11 +12,11 @@ function VentanaModal ({setModal, animarModal, setAnimarModal, guardarGasto}){
 
 
     const CerrarModal = () => {
-    
+        
+        setAnimarModal(false)
         setTimeout(() => {
             setModal(false)
-            setAnimarModal(false)
-        },500)
+           },500)
 
     }
 
