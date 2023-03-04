@@ -1,14 +1,26 @@
 import { useState, useEffect } from "react";
+import Mensaje from "./Mensaje";
 
 function ControlPresupuesto({presupuesto,gastos}) {
 
     const [disponible, setDisponible] = useState(0)
     const [gastado, setGastado] = useState(0)
+    const [mensaje, setMensaje] = useState("")
 
     useEffect(() => {
         const totalGastado = gastos.reduce((total, gasto) => gasto.cantidad + total, 0)
+        const totalDisponible = presupuesto - totalGastado
+
+        if(totalDisponible < 0){
+            setMensaje("ESTE GASTO SUPERO TU PRESUPUESTO")
+        }
+
         setGastado(totalGastado)
-    },[gastos]) 
+        setDisponible(totalDisponible)
+
+
+    }, [gastos])
+    
 
      const formatearCantidad = (cantidad) => {
         return cantidad.toLocaleString("en-US", {style:"currency", currency:"USD"});
@@ -22,7 +34,10 @@ function ControlPresupuesto({presupuesto,gastos}) {
                 <p>Grafica aqui</p>
             </div>
 
-            <div className="contenido-presupuesto">    
+
+
+                    <div className="contenido-presupuesto">    
+                    {mensaje && <Mensaje tipo="error">{mensaje}</Mensaje>}
                 <p>
                     <span> Presupuesto:</span> {formatearCantidad(presupuesto)}
                 </p>

@@ -3,7 +3,7 @@ import NuevoPresupuesto from "./NuevoPresupuesto";
 import ControlPresupuesto from "./ControlPresupuesto";
 
 
-function Header({presupuesto, setPresupuesto, isValid, setIsValid}) {
+function Header({presupuesto, setPresupuesto, isValid, setIsValid, gastos}) {
     return ( 
         
         <header>
@@ -14,6 +14,7 @@ function Header({presupuesto, setPresupuesto, isValid, setIsValid}) {
         {isValid ? (
             <ControlPresupuesto
             presupuesto={presupuesto}
+            gastos={gastos}
             />
          ) : (
          <div>

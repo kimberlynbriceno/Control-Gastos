@@ -1,3 +1,14 @@
+import React from "react";
+import {
+  LeadingActions,
+  SwipeableList,
+  SwipeableListItem,
+  SwipeAction,
+  TrailingActions,
+} from "react-swipeable-list"
+import "react-swipeable-list/dist/styles.css"
+"
+
 import { formatearFecha } from "../Helpers";
 import {formatearCantidad} from "./ControlPresupuesto"
 import iconoAhorro from "../img/icono_ahorro.svg"
