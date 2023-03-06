@@ -6,17 +6,22 @@ import VentanaModal from './component/VentanaModal'
 import NuevoPresupuesto from './component/NuevoPresupuesto'
 import ListadoGastos from './component/ListadoGastos'
 import { object } from 'prop-types'
+import Filtro from './component/Filtro'
 
 function App() {
 
-  const [presupuesto, setPresupuesto]= useState(0);
+  const [presupuesto, setPresupuesto]= useState(   
+     Number(localStorage.getItem('presupuesto')) ?? 0
+  );
   const [isValid, setIsValid]=useState(false)
 
   const[ modal , setModal] = useState(false)
   const [animarModal , setAnimarModal] = useState(false)
 
-  const [gastos, setGastos] = useState([])
-
+  const [gastos, setGastos] = useState(
+    localStorage.getItem('gastos') ? JSON.parse(localStorage.getItem('gastos')) : []
+  )
+ 
   const [gastoEditar, setGastoEditar]= useState({})
 
 
@@ -29,7 +34,21 @@ function App() {
    
     }
   },[gastoEditar])
+  
+  useEffect(() => {
+    localStorage.setItem('presupuesto', presupuesto ?? 0)
+  },[presupuesto])
 
+useEffect(()=> {
+  localStorage.setItem('gastos', JSON.stringify(gastos) ?? [])
+},[gastos])
+
+  useEffect(() =>{
+    const presupuestoLS = Number(localStorage.getItem('presupuesto')) ?? 0
+    if(presupuestoLS > 0){
+      setIsValid(true)
+    }
+  },[]) 
 
   const handleNuevoGasto = () => {
     setModal(true)
@@ -79,6 +98,7 @@ function App() {
         
        <> 
        <main>
+        <Filtro/>
           <ListadoGastos
           gastos={gastos}
           setGastoEditar={setGastoEditar}

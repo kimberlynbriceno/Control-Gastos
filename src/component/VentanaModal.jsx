@@ -8,7 +8,8 @@ function VentanaModal ({
     animarModal,
     setAnimarModal,
     guardarGasto, 
-    gastoEditar}){
+    gastoEditar,
+    setGastoEditar}){
 
     const [nombre, setNombre]= useState("")
     const [cantidad, setCantidad]= useState("") 
@@ -29,6 +30,7 @@ function VentanaModal ({
 
     const CerrarModal = () => {
         setAnimarModal(false)
+        setGastoEditar({})
         setTimeout(() => {
             setModal(false)
            },500)

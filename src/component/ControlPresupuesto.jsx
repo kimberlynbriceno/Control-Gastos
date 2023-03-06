@@ -1,11 +1,14 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import Mensaje from "./Mensaje";
+import {CircularProgressbar, buildStyles} from "react-circular-progressbar"
+import "react-circular-progressbar/dist/styles.css"
 
 function ControlPresupuesto({presupuesto,gastos}) {
 
     const [disponible, setDisponible] = useState(0)
     const [gastado, setGastado] = useState(0)
     const [mensaje, setMensaje] = useState("")
+    const [porcentaje, setPorcentaje] = useState(10)
 
     useEffect(() => {
         const totalGastado = gastos.reduce((total, gasto) => gasto.cantidad + total, 0)
@@ -13,11 +16,18 @@ function ControlPresupuesto({presupuesto,gastos}) {
 
         if(totalDisponible < 0){
             setMensaje("ESTE GASTO SUPERO TU PRESUPUESTO")
-        }
 
+            setTimeout(()=> {
+                setMensaje("")
+            }, 4000)
+        }
+        const nuevoPorcentaje = (((presupuesto - totalDisponible) / presupuesto)* 100).toFixed(2);  
+        
         setGastado(totalGastado)
         setDisponible(totalDisponible)
-
+        setTimeout(() =>{
+            setPorcentaje(nuevoPorcentaje)
+        }, 1000)
 
     }, [gastos])
     
@@ -31,7 +41,17 @@ function ControlPresupuesto({presupuesto,gastos}) {
     return ( 
         <div className="contenedor-presupuesto contenedor sombra dos-columnas">
             <div>
-                <p>Grafica aqui</p>
+            <CircularProgressbar
+            styles={buildStyles({
+            pathColor: '#37CF83',
+            strokeLinecap : 'butt' ,
+            textColor: '#37cf83' 
+
+            })}
+            value={porcentaje}
+            text={`${porcentaje}% Gastado`}
+             />
+
             </div>
 
 
