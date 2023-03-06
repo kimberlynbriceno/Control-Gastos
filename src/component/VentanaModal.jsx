@@ -14,12 +14,16 @@ function VentanaModal ({
     const [cantidad, setCantidad]= useState("") 
     const [categoria, setCategoria]= useState("")
     const [mensaje, setMensaje] = useState("")
+    const [id, setId]= useState("")
+    const [fecha, setFecha] = useState("")
 
     useEffect(()=> {
         if(Object.keys(gastoEditar).length > 0){
             setNombre(gastoEditar.nombre)
             setCantidad(gastoEditar.cantidad)
             setCategoria(gastoEditar.categoria)
+            setId(gastoEditar.id)
+            setFecha(gastoEditar.fecha)
 }
     },[])
 
@@ -42,7 +46,7 @@ function VentanaModal ({
             },3000)
 
         } else{
-            guardarGasto({nombre, cantidad, categoria})
+            guardarGasto({nombre, cantidad, categoria, id, fecha} )
                 }
       
     }
