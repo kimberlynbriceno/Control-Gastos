@@ -13,6 +13,9 @@ function ControlPresupuesto({presupuesto,gastos, setPresupuesto, setGastos, setI
     useEffect(() => {
         const totalGastado = gastos.reduce((total, gasto) => gasto.cantidad + total, 0)
         const totalDisponible = presupuesto - totalGastado
+                console.log(totalGastado)
+
+                
 
         if(totalDisponible < 0){
             setMensaje("ESTE GASTO SUPERO TU PRESUPUESTO")
@@ -23,15 +26,18 @@ function ControlPresupuesto({presupuesto,gastos, setPresupuesto, setGastos, setI
         }
         const nuevoPorcentaje = (((presupuesto - totalDisponible) / presupuesto)* 100).toFixed(2);  
         
-        setGastado(totalGastado)
-        setDisponible(totalDisponible)
+
         setTimeout(() =>{
             setPorcentaje(nuevoPorcentaje)
         }, 1000)
 
+        setGastado(totalGastado)
+        setDisponible(totalDisponible)
+
+
     }, [gastos])
     
-
+        
      const formatearCantidad = (cantidad) => {
         return cantidad.toLocaleString("en-US", {style:"currency", currency:"USD"});
     }
