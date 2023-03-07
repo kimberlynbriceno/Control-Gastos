@@ -3,7 +3,7 @@ import Mensaje from "./Mensaje";
 import {CircularProgressbar, buildStyles} from "react-circular-progressbar"
 import "react-circular-progressbar/dist/styles.css"
 
-function ControlPresupuesto({presupuesto,gastos}) {
+function ControlPresupuesto({presupuesto,gastos, setPresupuesto, setGastos, setIsValid}) {
 
     const [disponible, setDisponible] = useState(0)
     const [gastado, setGastado] = useState(0)
@@ -35,7 +35,15 @@ function ControlPresupuesto({presupuesto,gastos}) {
      const formatearCantidad = (cantidad) => {
         return cantidad.toLocaleString("en-US", {style:"currency", currency:"USD"});
     }
-
+        const handleReset = () => {
+            const result = window.confirm('Deseas eliminar todos los registros ')
+            
+            if(result){
+                setGastos([])
+                setPresupuesto(0)
+                setIsValid(false)
+            }
+        }
  
 
     return ( 
@@ -45,7 +53,7 @@ function ControlPresupuesto({presupuesto,gastos}) {
             styles={buildStyles({
             pathColor: '#37CF83',
             strokeLinecap : 'butt' ,
-            textColor: '#37cf83' 
+            textColor: porcentaje > 100 ? '#b91c1c' : '#37CF83' 
 
             })}
             value={porcentaje}
@@ -61,12 +69,16 @@ function ControlPresupuesto({presupuesto,gastos}) {
                 <p>
                     <span> Presupuesto:</span> {formatearCantidad(presupuesto)}
                 </p>
-                <p>
+                <p className={`${disponible < 0 ? 'negativo' : '' }`}>
                     <span> Disponible:</span> {formatearCantidad(disponible)}
                 </p>
                 <p>
                     <span> Gastado:</span> {formatearCantidad(gastado)}  
                 </p>
+                <button className="reset-app"
+                        onClick={handleReset}>
+                    Resetear APP
+                </button>
             </div>
         </div>
      );

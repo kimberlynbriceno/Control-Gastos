@@ -16,7 +16,7 @@ const Filtro = ({filtros, setFiltros}) => {
                     >
 
 
-                <option value="">--Selecione--</option>
+                <option value="">--TODAS LAS CATEGORIAS--</option>
                 <option value="Entretenimiento">Entretenimiento</option>
                 <option value="Salud">Salud</option>
                 <option value="Alimentacion">Alimentacion</option>

@@ -24,7 +24,7 @@ function App() {
  
   const [gastoEditar, setGastoEditar]= useState({}) 
   const [filtros, setFiltros] = useState("")    
-  const [gastosFiltrados, setGastosFiltrados] = useState('')
+  const [gastosFiltrados, setGastosFiltrados] = useState([])
 
 
   useEffect(()=>{
@@ -100,6 +100,7 @@ useEffect(()=> {
       setPresupuesto={setPresupuesto}
       isValid={isValid}
       setIsValid={setIsValid}
+      setGastos={setGastos}
       />
       
       {isValid ? (
