@@ -33,7 +33,7 @@ function ControlPresupuesto({presupuesto,gastos, setPresupuesto, setGastos, setI
 
         setGastado(totalGastado)
         setDisponible(totalDisponible)
-
+    // arreglar autocarga de gastado
 
     }, [gastos])
     
