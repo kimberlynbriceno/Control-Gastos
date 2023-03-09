@@ -87,7 +87,6 @@ useEffect(()=> {
   
         setGastos([...gastos, gasto])
         }  
-      console.log(gasto)
       setAnimarModal(false)
         setTimeout(() => {
             setModal(false)
