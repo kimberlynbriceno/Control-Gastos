@@ -8,12 +8,20 @@ function ControlPresupuesto({presupuesto,gastos, setPresupuesto, setGastos, setI
     const [disponible, setDisponible] = useState(0)
     const [gastado, setGastado] = useState(0)
     const [mensaje, setMensaje] = useState("")
-    const [porcentaje, setPorcentaje] = useState(10)
+    const [porcentaje, setPorcentaje] = useState(0)
 
     useEffect(() => {
         const totalGastado = gastos.reduce((total, gasto) => gasto.cantidad + total, 0)
         const totalDisponible = presupuesto - totalGastado
-                console.log(totalGastado)
+
+        setGastado(totalGastado)
+        setDisponible(totalDisponible)
+        
+               
+        
+        console.log(totalGastado)
+        console.log(gastado)
+         console.log(totalDisponible)
 
                 
 
@@ -31,8 +39,7 @@ function ControlPresupuesto({presupuesto,gastos, setPresupuesto, setGastos, setI
             setPorcentaje(nuevoPorcentaje)
         }, 1000)
 
-        setGastado(totalGastado)
-        setDisponible(totalDisponible)
+       
     // arreglar autocarga de gastado
 
     }, [gastos])
@@ -41,6 +48,7 @@ function ControlPresupuesto({presupuesto,gastos, setPresupuesto, setGastos, setI
      const formatearCantidad = (cantidad) => {
         return cantidad.toLocaleString("en-US", {style:"currency", currency:"USD"});
     }
+
         const handleReset = () => {
             const result = window.confirm('Deseas eliminar todos los registros ')
             

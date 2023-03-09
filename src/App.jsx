@@ -38,6 +38,7 @@ function App() {
   },[gastoEditar])
   
   useEffect(() => {
+    
     localStorage.setItem('presupuesto', presupuesto ?? 0); 
   },[presupuesto])
 
@@ -46,12 +47,15 @@ useEffect(()=> {
 },[gastos])
 
   useEffect(() =>{
+    // presupuesto en local storage
     const presupuestoLS = Number(localStorage.getItem('presupuesto')) ?? 0
     if(presupuestoLS > 0){
       setIsValid(true)
     }
   },[]) 
+
   useEffect(() => {
+    // filtrar gastos
     if(filtros){
         const gastosFilt = gastos.filter(gasto => gasto.categoria === filtros)
         setGastosFiltrados(gastosFilt)
@@ -59,6 +63,7 @@ useEffect(()=> {
   },[filtros])
 
   const handleNuevoGasto = () => {
+    // boton + nuevo gasto
     setModal(true)
     setGastoEditar({})
     
@@ -68,18 +73,20 @@ useEffect(()=> {
  }
 
     const guardarGasto  = gasto => {
+    
       if(gasto.id){
+        // actializar
         const gastoActualizados = gastos.map( gastoState => gastoState.id === gasto.id ? gasto : gastoState)
 
         setGastos(gastoActualizados)
         setGastoEditar({})
-      }else{
+      }else{ 
+        // gasto nuevo
         gasto.id = generarId()
         gasto.fecha = Date.now();
   
         setGastos([...gastos, gasto])
         }  
-      console.log(gasto)
       setAnimarModal(false)
         setTimeout(() => {
             setModal(false)
@@ -96,11 +103,11 @@ useEffect(()=> {
       
       <Header
       gastos={gastos}
+      setGastos={setGastos}
       presupuesto={presupuesto}
       setPresupuesto={setPresupuesto}
       isValid={isValid}
       setIsValid={setIsValid}
-      setGastos={setGastos}
       />
       
       {isValid ? (
